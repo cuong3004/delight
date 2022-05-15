@@ -38,6 +38,20 @@ elif [ "$DATASET" == "wmt14_en_fr" ]; then
         --trainpref $TEXT/train --validpref $TEXT/valid --testpref $TEXT/test \
         --destdir data-bin/wmt14_en_fr --thresholdtgt 0 --thresholdsrc 0 \
         --workers 60 --joined-dictionary
+
+elif [ "$DATASET" == "mtet_en_vi" ]; then
+    cd examples/translation/
+        bash prepare_mtet_en2vi.sh
+    cd ../..
+
+    # Binarize the dataset
+    TEXT=examples/translation/mtet_en_vi
+    fairseq-preprocess \
+        --source-lang en --target-lang vi \
+        --trainpref $TEXT/train --validpref $TEXT/valid \
+        --destdir data-bin/mtet_en_vi --thresholdtgt 0 --thresholdsrc 0 \
+        --workers 10 --joined-dictionary
+
 else
-    echo "Only these datasets are supported (wmt14_en_de, wmt14_en_fr)"
+    echo "Only these datasets are supported (wmt14_en_de, wmt14_en_fr, mtet_en_vi)"
 fi
