@@ -1,3 +1,6 @@
+mkdir mtet_en_vi
+cd mtet_en_vi
+
 # Download train vietnamese
 wget https://storage.googleapis.com/vietai_public/best_vi_translation/v2/train.vi
 
